@@ -1,6 +1,10 @@
 package mathengine.vector;
 
-public class HomogeneousVector extends Vector3D {
+import mathengine.matrix.MatrixLike;
+import mathengine.matrix.IMatrix;
+import mathengine.matrix.Matrix;
+
+public class HomogeneousVector extends Vector3D implements MatrixLike {
     private double w;
 
     public HomogeneousVector(double x, double y, double z, double w) {
@@ -28,5 +32,10 @@ public class HomogeneousVector extends Vector3D {
         var z = this.getZ();
         var w = this.getW();
         return new Vector3D(x / w, y / w, z / w);
+    }
+
+    public IMatrix asMatrix() {
+        double[][] data = { { this.getX(), this.getY(), this.getZ(), this.getW() } };
+        return new Matrix(data);
     }
 }

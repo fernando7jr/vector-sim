@@ -1,6 +1,10 @@
 package mathengine.vector;
 
-public abstract class Vector {
+import mathengine.matrix.IMatrix;
+import mathengine.matrix.Matrix;
+import mathengine.matrix.MatrixLike;
+
+public abstract class Vector implements MatrixLike {
     protected abstract Vector setNew(double x, double y, double z);
 
     public abstract double getX();
@@ -10,6 +14,11 @@ public abstract class Vector {
     public abstract double getZ();
 
     public abstract void set(double x, double y, double z);
+
+    public IMatrix asMatrix() {
+        double[][] data = { { this.getX(), this.getY(), this.getZ() } };
+        return new Matrix(data);
+    }
 
     public void set(double value) {
         this.set(value, value, value);
