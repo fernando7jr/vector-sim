@@ -11,6 +11,10 @@ public class Matrix implements IMatrix {
         this.data = new double[width][height];
     }
 
+    public Matrix(int size) {
+        this.data = new double[size][size];
+    }
+
     public Matrix(Matrix matrix) {
         var width = matrix.getWidth();
         var height = matrix.getHeight();
