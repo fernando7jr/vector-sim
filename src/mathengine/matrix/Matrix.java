@@ -197,4 +197,26 @@ public class Matrix implements IMatrix {
     public IMatrix subtract(MatrixLike matrixLike) {
         return this.subtract(matrixLike.asMatrix());
     }
+
+    public boolean equals(IMatrix matrix) {
+        var width = this.getWidth();
+        var height = this.getHeight();
+        if (width != matrix.getWidth() || height != matrix.getHeight()) {
+            return false;
+        }
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
+                var a = this.getAt(i, j);
+                var b = matrix.getAt(i, j);
+                if (a != b) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public boolean equals(MatrixLike matrixLike) {
+        return this.equals(matrixLike.asMatrix());
+    }
 }

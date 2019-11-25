@@ -24,4 +24,8 @@ public interface IMatrix {
     IMatrix subtract(MatrixLike matrix);
 
     IMatrix subtract(IMatrix matrix);
+
+    boolean equals(IMatrix matrix);
+
+    boolean equals(MatrixLike matrixLike);
 }
