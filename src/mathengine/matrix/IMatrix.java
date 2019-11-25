@@ -28,4 +28,10 @@ public interface IMatrix {
     boolean equals(IMatrix matrix);
 
     boolean equals(MatrixLike matrixLike);
+
+    IMatrix to2x2();
+
+    IMatrix to3x3();
+
+    IMatrix to4x4();
 }

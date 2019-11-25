@@ -223,4 +223,32 @@ public class Matrix implements IMatrix {
     public boolean equals(MatrixLike matrixLike) {
         return this.equals(matrixLike.asMatrix());
     }
+
+    protected void copyTo(IMatrix matrix) {
+        var width = Math.min(this.getWidth(), matrix.getWidth());
+        var height = Math.min(this.getHeight(), matrix.getHeight());
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
+                matrix.setAt(i, j, this.getAt(i, j));
+            }
+        }
+    }
+
+    public IMatrix to2x2() {
+        var matrix = Matrix.identity2x2();
+        this.copyTo(matrix);
+        return matrix;
+    }
+
+    public IMatrix to3x3() {
+        var matrix = Matrix.identity3x3();
+        this.copyTo(matrix);
+        return matrix;
+    }
+
+    public IMatrix to4x4() {
+        var matrix = Matrix.identity4x4();
+        this.copyTo(matrix);
+        return matrix;
+    }
 }
