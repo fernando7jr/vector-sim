@@ -1,17 +1,17 @@
 package mathengine.vector;
 
 public abstract class Vector {
-    protected abstract Vector setNew(float x, float y, float z);
+    protected abstract Vector setNew(double x, double y, double z);
 
-    public abstract float getX();
+    public abstract double getX();
 
-    public abstract float getY();
+    public abstract double getY();
 
-    public abstract float getZ();
+    public abstract double getZ();
 
-    public abstract void set(float x, float y, float z);
+    public abstract void set(double x, double y, double z);
 
-    public void set(float value) {
+    public void set(double value) {
         this.set(value, value, value);
     }
 
@@ -19,19 +19,19 @@ public abstract class Vector {
         this.set(vector.getX(), vector.getY(), vector.getZ());
     }
 
-    public float getSquaredSum() {
+    public double getSquaredSum() {
         var x = this.getX();
         var y = this.getY();
         var z = this.getZ();
         return x * x + y * y + z * z;
     }
 
-    public float getMagnitude() {
+    public double getMagnitude() {
         var squaredSum = this.getSquaredSum();
         if (squaredSum == 0.0) {
             return 0.0f;
         }
-        return (float) Math.sqrt(squaredSum);
+        return (double) Math.sqrt(squaredSum);
     }
 
     public Vector normalize() {
@@ -42,11 +42,11 @@ public abstract class Vector {
         return this.setNew(x, y, z);
     }
 
-    public boolean equals(float x, float y, float z) {
+    public boolean equals(double x, double y, double z) {
         return this.getX() == x && this.getY() == y && this.getZ() == z;
     }
 
-    public boolean equals(float x, float y) {
+    public boolean equals(double x, double y) {
         return this.equals(x, y, this.getZ());
     }
 
@@ -65,11 +65,11 @@ public abstract class Vector {
         return this.setNew(-this.getX(), -this.getY(), -this.getZ());
     }
 
-    public Vector sum(float x, float y, float z) {
+    public Vector sum(double x, double y, double z) {
         return this.setNew(this.getX() + x, this.getY() + y, this.getZ() + z);
     }
 
-    public Vector sum(float value) {
+    public Vector sum(double value) {
         return this.sum(value, value, value);
     }
 
@@ -77,11 +77,11 @@ public abstract class Vector {
         return this.sum(vector.getX(), vector.getY(), vector.getZ());
     }
 
-    public Vector subtract(float x, float y, float z) {
+    public Vector subtract(double x, double y, double z) {
         return this.setNew(this.getX() - x, this.getY() - y, this.getZ() - z);
     }
 
-    public Vector subtract(float value) {
+    public Vector subtract(double value) {
         return this.subtract(value, value, value);
     }
 
@@ -89,11 +89,11 @@ public abstract class Vector {
         return this.subtract(vector.getX(), vector.getY(), vector.getZ());
     }
 
-    public Vector multiply(float x, float y, float z) {
+    public Vector multiply(double x, double y, double z) {
         return this.setNew(this.getX() * x, this.getY() * y, this.getZ() * z);
     }
 
-    public Vector multiply(float value) {
+    public Vector multiply(double value) {
         return this.multiply(value, value, value);
     }
 
@@ -101,11 +101,11 @@ public abstract class Vector {
         return this.multiply(vector.getX(), vector.getY(), vector.getZ());
     }
 
-    public Vector divide(float x, float y, float z) {
+    public Vector divide(double x, double y, double z) {
         return this.setNew(this.getX() / x, this.getY() / y, this.getZ() / z);
     }
 
-    public Vector divide(float value) {
+    public Vector divide(double value) {
         return this.divide(value, value, value);
     }
 
@@ -121,7 +121,7 @@ public abstract class Vector {
         return this.setNew(x, y, z);
     }
 
-    public float distance(Vector vector) {
+    public double distance(Vector vector) {
         return this.distanceVector(vector).getMagnitude();
     }
 
@@ -136,7 +136,7 @@ public abstract class Vector {
      * components) to calculate a valid dot product. The result of a dot product is
      * always a scalar.
      */
-    public float dot(Vector vector) {
+    public double dot(Vector vector) {
         var x = this.getX() * vector.getX();
         var y = this.getY() * vector.getY();
         var z = this.getZ() * vector.getZ();
@@ -146,10 +146,10 @@ public abstract class Vector {
     /*
      * The angle in rads between the two vectors
      */
-    public float angle(Vector vector) {
+    public double angle(Vector vector) {
         var dotProduct = this.dot(vector);
         var cos = Math.cos(dotProduct);
-        return (float) Math.pow(cos, -1);
+        return (double) Math.pow(cos, -1);
     }
 
     /**
@@ -171,7 +171,7 @@ public abstract class Vector {
     public Vector project(Vector vector) {
         var dotProduct = this.dot(vector);
         var vectorMagnitude = vector.getMagnitude();
-        float vectorMagnitudeSquared = vectorMagnitude == 1 ? 1 : (float) Math.pow(vectorMagnitude, 2);
+        double vectorMagnitudeSquared = vectorMagnitude == 1 ? 1 : (double) Math.pow(vectorMagnitude, 2);
         var vector2 = vector.multiply(dotProduct / vectorMagnitudeSquared);
         return this.subtract(vector2);
     }
@@ -195,9 +195,9 @@ public abstract class Vector {
         var vectorY = vector.getY();
         var vectorZ = vector.getZ();
 
-        float x = thisY * vectorZ + thisZ * vectorY;
-        float y = thisZ * vectorX + thisX * vectorZ;
-        float z = thisX * vectorY + thisY * vectorX;
+        double x = thisY * vectorZ + thisZ * vectorY;
+        double y = thisZ * vectorX + thisX * vectorZ;
+        double z = thisX * vectorY + thisY * vectorX;
         return this.setNew(x, y, z);
     }
 }

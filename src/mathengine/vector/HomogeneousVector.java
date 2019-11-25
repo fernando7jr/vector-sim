@@ -1,28 +1,32 @@
 package mathengine.vector;
 
 public class HomogeneousVector extends Vector3D {
-    private float w;
+    private double w;
 
-    public HomogeneousVector(float x, float y, float z, float w) {
+    public HomogeneousVector(double x, double y, double z, double w) {
         super(x, y, z);
         this.w = w;
     }
 
-    public HomogeneousVector(float x, float y, float z) {
+    public HomogeneousVector(double x, double y, double z) {
         super(x, y, z);
         this.w = 1.0f;
     }
 
-    public HomogeneousVector(Vector vector, float w) {
+    public HomogeneousVector(Vector vector, double w) {
         super(vector);
         this.w = 1.0f;
     }
 
-    public float getW() {
+    public double getW() {
         return this.w;
     }
 
     public Vector getVector() {
-        return new Vector3D(this);
+        var x = this.getX();
+        var y = this.getY();
+        var z = this.getZ();
+        var w = this.getW();
+        return new Vector3D(x / w, y / w, z / w);
     }
 }
